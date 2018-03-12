@@ -1,0 +1,34 @@
+interface TableSettings{
+    header?: boolean,
+    classPrefix?: string,
+    noRowsMessage?: string,
+    cellClass?: Function,
+    headerClass?: Function,
+    keyField?: string,
+    rowClass?: Function,
+    cellRenderer?: Function
+    freezeHeader?: boolean
+    fixedHeader?: boolean
+}
+
+interface TableProps{
+    rows: any[],
+    columns?: ColumnSetting[],
+    columnDefinitions?: ColumnSetting[],
+    excludeColumns?: string[],
+    className?: string,
+    theadClassName?: string,
+    caption?: string,
+    settings?: TableSettings,
+    onClickCell?: Function,
+    onClickHeader?: Function,
+    onClickRow?: Function,
+}
+
+interface ColumnSetting{
+    key: string,
+    label?: string,
+    cell?: Function | string,
+    group?: string,
+    objectDisplayStyle?: string
+}

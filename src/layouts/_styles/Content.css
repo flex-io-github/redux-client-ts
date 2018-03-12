@@ -1,0 +1,24 @@
+.body .container {
+    /* padding: 1em; */
+    overflow-x: auto;
+  }
+
+  .body .ms-Breadcrumb {
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .body .selection {
+    /* height: calc(100vh - 20.5em); */
+    overflow-x: auto;
+    height: 100%
+  }
+
+  .body .selection .selection-item {
+    display: flex;
+    /* padding: 0.5em; */
+  }
+
+  .body .selection .selection-item .name {
+    margin-left: 1em;
+  }
