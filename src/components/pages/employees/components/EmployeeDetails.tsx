@@ -102,6 +102,10 @@ export class EmployeeDetails extends React.Component<
       selectionDetails: this._getSelectionDetails(),
     }
   }
+  
+  componentWillReceiveProps(nextProps: any){
+      this.setState({ columns:buildColumns(nextProps.items) })
+  }
 
   render() {
     return (

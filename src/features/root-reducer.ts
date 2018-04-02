@@ -6,6 +6,7 @@ import { todosReducer, TodosState } from "./todos"
 import { sessionReducer, SessionState } from "./session"
 import { enthusiasmReducer, EnthusiasmState } from "./enthusiasm"
 import { EmployeeState, employeeReducer } from "./employee"
+import { EmployeeStatusState, employeeStatusReducer } from "./employeeStatus";
 
 interface StoreEnhancerState {}
 
@@ -16,6 +17,7 @@ export interface RootState extends StoreEnhancerState {
   session: SessionState
   enthusiasm: EnthusiasmState
   employee: EmployeeState
+  employeeStatus: EmployeeStatusState
 }
 
 import { RootAction } from "./root-action"
@@ -27,4 +29,5 @@ export const rootReducer = combineReducers<RootState, RootAction>({
   session: sessionReducer,
   enthusiasm: enthusiasmReducer,
   employee: employeeReducer,
+  employeeStatus: employeeStatusReducer,
 })

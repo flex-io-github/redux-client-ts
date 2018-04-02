@@ -34,7 +34,7 @@
     "css-loader": "^0.28.10",
     "cuid": "^2.0.2",
     "loadash": "^1.0.0",
-    "office-ui-fabric-react": "^5.54.0",
+    "office-ui-fabric-react": "^5.63.0",
     "promise": "^8.0.1",
     "react": "16.2.0",
     "react-dom": "16.2.0",

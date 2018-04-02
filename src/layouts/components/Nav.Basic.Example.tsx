@@ -40,6 +40,16 @@ export class SideNav extends React.Component<ISideNavProps, any> {
                 url: "/employees",
                 key: "/employees",
               },
+              {
+                name: "Maintenance",
+                url: "",
+                links: [{
+                  name: 'Employee Status',
+                  url: '/maintenance/employee_status',
+                  key: '/maintenance/employee_status'
+                }],
+                isExpanded: true
+              },
             ],
           },
         ]}

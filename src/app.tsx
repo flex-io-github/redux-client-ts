@@ -15,6 +15,7 @@ import { Switch } from "react-router"
 import pageShell from "./components/common/page_shell"
 import Dashboard from "./components/dashboard"
 import { EmployeePage } from "./components/pages/employees"
+import { EmployeeStatusPage } from "./components/pages/maintenance/employee_status";
 import { initializeIcons } from "@uifabric/icons"
 import "./layouts/_styles/index.css"
 // Register icons and pull the fonts from the default SharePoint cdn.
@@ -37,8 +38,9 @@ export class App extends React.Component<Props, {}> {
           <Switch>
             <Route path="/login" component={pageShell(Login)} />
             <MainLayout>
-              <PrivateRoute path="/" exact={true} component={Dashboard} />
-              <PrivateRoute path="/employees" component={EmployeePage} />
+              <Route path="/" exact={true} component={Dashboard} />
+              <Route path="/employees" component={EmployeePage} />
+              <Route path="/maintenance/employee_status" component={EmployeeStatusPage} />
             </MainLayout>
           </Switch>
         </ConnectedRouter>

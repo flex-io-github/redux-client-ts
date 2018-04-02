@@ -7,6 +7,7 @@ import * as todosActions from './todos/actions';
 import { sessionActions } from './session'
 import { enthusiasmActions } from './enthusiasm/actions'
 import { employeeActions } from './employee';
+import { employeeStatusActions } from './employeeStatus';
 
 export const actions = {
   counters: countersActions,
@@ -14,6 +15,7 @@ export const actions = {
   sessions: sessionActions,
   enthusiasm: enthusiasmActions,
   employees: employeeActions,
+  employeesStatus: employeeActions
 };
 
 const returnsOfActions = [
@@ -22,6 +24,7 @@ const returnsOfActions = [
   ...Object.values(sessionActions),
   ...Object.values(enthusiasmActions),
   ...Object.values(employeeActions),
+  ...Object.values(employeeStatusActions)
 ].map($call);
 
 type AppAction = typeof returnsOfActions[number];

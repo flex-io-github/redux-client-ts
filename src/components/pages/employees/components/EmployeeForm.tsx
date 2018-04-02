@@ -48,11 +48,9 @@ export class EmployeeForm extends React.Component<Props, State> {
       // console.log('Component did mount');
   }
 
-  componentWillReceiveProps(){
-      // console.log('Component will receive props');
+  componentWillReceiveProps(nextProps: any){
+      this.setState({ employeeState:nextProps.employeeProps })
   }
-
-
 
   render() {
     const { employeeState } = this.state;
@@ -123,6 +121,6 @@ export class EmployeeForm extends React.Component<Props, State> {
   @autobind
   public show() {
 
-    this.setState({ employeeState:this.props.employeeProps, showPanel: true })
+    this.setState({ showPanel: true })
   }
 }
