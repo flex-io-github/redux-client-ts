@@ -10,18 +10,18 @@ import {
 } from "office-ui-fabric-react"
 
 import { autobind } from "@uifabric/utilities"
-import { EmployeeStatusForm } from "./EmployeeStatusForm"
-import { IEmployeeStatus } from '@src/models';
+import { PositionForm } from "./PositionForm"
+import { IPosition } from '@src/models';
 import { DialogBox } from '../../../../DialogBox'
 
 interface IProps {
     items: any[]
     onClickAddButton: () => void
-    onDeleteRecord: (employeeStatusId: number) => void
+    onDeleteRecord: (positionId: number) => void
     onUpdateRecord: () => void
-    // recordToView: (employeeId: number) => void
-    employeeStatusDetail: IEmployeeStatus
-    recordToView: (employeeStatusId: number) => void
+    // recordToView: (positionId: number) => void
+    positionDetail: IPosition
+    recordToView: (positionId: number) => void
 }
 
 export interface IState {
@@ -30,10 +30,10 @@ export interface IState {
     selectionDetails: {}
 }
 
-export class EmployeeStatusDetails extends React.Component<IProps, IState> {
+export class PositionDetails extends React.Component<IProps, IState> {
     private _selection: Selection
     private _detailList: any
-    private _employeeStatusFrom: EmployeeStatusForm | any
+    private _positionFrom: PositionForm | any
     private _DialogBox: DialogBox | any
 
     constructor(props: IProps) {
@@ -64,7 +64,7 @@ export class EmployeeStatusDetails extends React.Component<IProps, IState> {
                 {this.renderCommandBar()}
                 {this.renderTable()}
                 {this.renderForm()}
-                {this.renderDialogBox()}
+                {this.renderDeleteDialogBox()}
             </div>
         );
     }
@@ -92,15 +92,15 @@ export class EmployeeStatusDetails extends React.Component<IProps, IState> {
 
     renderForm() {
         return (
-            <EmployeeStatusForm
-                employeeStatusProps={this.props.employeeStatusDetail}
-                ref={(thisElement) => this._employeeStatusFrom = thisElement}
-                updateEmployeeStatus={this.props.onUpdateRecord}
+            <PositionForm
+                positionProps={this.props.positionDetail}
+                ref={(thisElement) => this._positionFrom = thisElement}
+                updatePosition={this.props.onUpdateRecord}
             />
         )
     }
 
-    renderDialogBox() {
+    renderDeleteDialogBox() {
         return (
             <DialogBox 
                 onContinue={this.continueDelete}
@@ -138,9 +138,9 @@ export class EmployeeStatusDetails extends React.Component<IProps, IState> {
 
     @autobind
     clickedEditButton() {
-        const employeeIdSelected: number = this._getSelectionDetails()
-        this.props.recordToView(employeeIdSelected)
-        this._employeeStatusFrom.show()
+        const positionIdSelected: number = this._getSelectionDetails()
+        this.props.recordToView(positionIdSelected)
+        this._positionFrom.show()
     }
 
     @autobind
@@ -157,8 +157,8 @@ export class EmployeeStatusDetails extends React.Component<IProps, IState> {
 
     @autobind
     continueDelete() {
-        const employeeStatusIdSelected: number = this._getSelectionDetails()
-        if (employeeStatusIdSelected > 0) this.props.onDeleteRecord(employeeStatusIdSelected)
+        const positionIdSelected: number = this._getSelectionDetails()
+        if (positionIdSelected > 0) this.props.onDeleteRecord(positionIdSelected)
     }
 }
 

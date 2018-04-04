@@ -71,7 +71,6 @@ export class CrudGeneric<T extends IDbEntity> implements ICrud<T> {
     }
     add(entity: T): Promise<string> {
         // entity = this.mapper.removeId(entity);
-
         return axios
             .post(`${this.endPointUrl}/${this.collectionName}`, entity)
             .then(response => (response.data as any).name);
@@ -86,5 +85,10 @@ export class CrudGeneric<T extends IDbEntity> implements ICrud<T> {
         return axios
             .get(`${this.endPointUrl}/${this.collectionName}/${id}`)
             .then(response => this.mapper.toViewModel(id, response.data));
+    }
+    update(entity:T): Promise<string> {
+        return axios
+        .put(`${this.endPointUrl}/${this.collectionName}/${entity.id}`, entity)
+        .then(response => (response.data as any).name);
     }
 }

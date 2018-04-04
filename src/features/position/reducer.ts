@@ -1,40 +1,40 @@
 import { combineReducers } from "redux"
 import { getType, getReturnOfExpression } from "typesafe-actions"
 
-import * as employeeStatusActions from './actions'
-import { IEmployeeStatus } from '../../models';
+import * as positionActions from './actions'
+import { IPosition } from '../../models';
 import _ from 'lodash';
 
-const returnsOfAction = Object.values(employeeStatusActions).map(getReturnOfExpression);
+const returnsOfAction = Object.values(positionActions).map(getReturnOfExpression);
 export type Action = typeof returnsOfAction[number];
 
-export type EmployeeStatusState = {
-    readonly list: IEmployeeStatus[];
+export type PositionState = {
+    readonly list: IPosition[];
     readonly detail: any;
 }
 
 
-export const employeeStatusReducer = combineReducers<EmployeeStatusState, Action>({
+export const positionReducer = combineReducers<PositionState, Action>({
     list: (state = [], action) => {
         switch (action.type) {
-            case getType(employeeStatusActions.receivedRecord):
+            case getType(positionActions.receivedRecord):
                 return action.payload;
-            case getType(employeeStatusActions.saveNewRecord):
+            case getType(positionActions.saveNewRecord):
                 return [...state, action.payload];
-            case getType(employeeStatusActions.deleteRecord):
+            case getType(positionActions.deleteRecord):
                 {
-                    const employeeStatusToRemove: any = _.find(state, (employeeStatus) => {
-                        return employeeStatus.id === action.employeeStatusId
+                    const positionToRemove: any = _.find(state, (position) => {
+                        return position.id === action.positionId
                     })
 
-                    const index = state.indexOf(employeeStatusToRemove);
+                    const index = state.indexOf(positionToRemove);
 
                     return [
                         ...state.slice(0, index),
                         ...state.slice(index + 1)
                     ];
                 }
-            case getType(employeeStatusActions.updateRecord):
+            case getType(positionActions.updateRecord):
                 {
                     const editedPosition: any = _.find(state, (position) => {
                         return position.id === action.payload.id
@@ -58,7 +58,7 @@ export const employeeStatusReducer = combineReducers<EmployeeStatusState, Action
     },
     detail: (state = {}, action) => {
         switch(action.type){
-            case getType(employeeStatusActions.recordInfo):
+            case getType(positionActions.recordInfo):
                 return _.assign({}, state, action.payload);
             default: return state;
         }

@@ -59,8 +59,8 @@ export function* employeeStatusService(action: Actions): {} {
       )
   
       yield put(employeeStatusActions.recordInfo(resp))
-    // }else if (action.type == getType(employeeStatusActions.updateRecord)) {
-    //   // console.log(action.employeeId)
-    //   yield call(() => EmployeeStatusDS.employeesStatus.update(action.payload));
+    }else if (action.type == getType(employeeStatusActions.updateRecord)) {
+      // console.log(action.employeeId)
+      yield call(() => EmployeeStatusDS.employeesStatus.update(action.payload));
     }
 }

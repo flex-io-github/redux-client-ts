@@ -1,0 +1,7 @@
+export const FETCH_LIST = '@@position/FETCH_LIST'
+export const RECEIVED_LIST = '@@position/RECEIVED_LIST'
+export const SAVE_NEW_RECORD = '@@position/SAVE_NEW_RECORD'
+export const RECORD_INFO = '@@position/RECORD_INFO'
+export const DELETE_RECORD = '@@position/DELETE_RECORD'
+export const UPDATE_RECORD = '@@position/UPDATE_RECORD'
+export const RECORD_TO_VIEW = '@@position/RECORD_TO_VIEW'

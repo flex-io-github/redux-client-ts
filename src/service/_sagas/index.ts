@@ -2,6 +2,7 @@ import { takeEvery, all, takeLatest } from "redux-saga/effects"
 import { login } from "./session_sagas"
 import { employeeService } from './employee_sagas';
 import { employeeStatusService } from './employeeStatus_sagas';
+import { positionService } from './position_sagas';
 // import { bootstrap } from "./bootstrap_sagas"
 
 export default function *root(): {} {
@@ -18,6 +19,12 @@ export default function *root(): {} {
         takeLatest("@@employeeStatus/DELETE_RECORD", employeeStatusService),
         takeEvery("@@employeeStatus/RECORD_TO_VIEW", employeeStatusService),
         takeEvery("@@employeeStatus/UPDATE_RECORD", employeeStatusService),
+        
+        takeEvery("@@position/FETCH_LIST", positionService),
+        takeLatest("@@position/SAVE_NEW_RECORD", positionService),
+        takeLatest("@@position/DELETE_RECORD", positionService),
+        takeEvery("@@position/RECORD_TO_VIEW", positionService),
+        takeEvery("@@position/UPDATE_RECORD", positionService),
     ])
 
 }

@@ -1,6 +1,7 @@
-import { DataSource, EmployeeStatusDS } from './DataSource';
+import { DataSource, EmployeeStatusDS, PositionDS } from './DataSource';
 
 export {
     DataSource,
-    EmployeeStatusDS
+    EmployeeStatusDS,
+    PositionDS,
 }

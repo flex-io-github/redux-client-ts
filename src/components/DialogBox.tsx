@@ -3,21 +3,21 @@ import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dia
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { autobind } from "@uifabric/utilities"
 
-// interface IProps {
-//     onhideDialog: () => void
-// }
+interface IProps {
+    onContinue: () => void
+    title: string
+    subText: string
+    primaryButton: string
+    secondaryButton: string
+}
 
-interface IEmployeeFormPanelState {
+interface IState {
     hideDialog: boolean
 }
-// type Props = IProps
-type State = IEmployeeFormPanelState
+type Props = IProps
+type State = IState
 
-
-export class DialogBox extends React.Component<
-// Props
-{}
-, State> {
+export class DialogBox extends React.Component<Props, State> {
   constructor(props: any) {
     super(props)
     // console.log('Component has been created')
@@ -32,11 +32,11 @@ export class DialogBox extends React.Component<
 
         <Dialog
             hidden={ this.state.hideDialog }
-            onDismiss={ this._closeDialog }
+            onDismiss={ this._cancel }
             dialogContentProps={ {
             type: DialogType.normal,
-            title: 'All emails together',
-            subText: 'Your Inbox has changed. No longer does it include favorites, it is a singular destination for your emails.'
+            title: `${this.props.title}`,
+            subText: `${this.props.subText}`
             } }
             modalProps={ {
             isBlocking: true,
@@ -44,8 +44,8 @@ export class DialogBox extends React.Component<
             } }
         >
             <DialogFooter>
-            <PrimaryButton onClick={ this._closeDialog } text='Save' />
-            <DefaultButton onClick={ this._closeDialog } text='Cancel' />
+            <PrimaryButton onClick={ this._continue } text={this.props.primaryButton} />
+            <DefaultButton onClick={ this._cancel } text={this.props.secondaryButton} />
             </DialogFooter>
         </Dialog>
     )
@@ -57,7 +57,13 @@ export class DialogBox extends React.Component<
   }
 
   @autobind
-  _closeDialog() {
+  _cancel() {
+    this.setState({ hideDialog: true });
+  }
+
+  @autobind
+  _continue() {
+    this.props.onContinue()
     this.setState({ hideDialog: true });
   }
 }

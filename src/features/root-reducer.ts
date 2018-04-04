@@ -7,6 +7,7 @@ import { sessionReducer, SessionState } from "./session"
 import { enthusiasmReducer, EnthusiasmState } from "./enthusiasm"
 import { EmployeeState, employeeReducer } from "./employee"
 import { EmployeeStatusState, employeeStatusReducer } from "./employeeStatus";
+import { PositionState, positionReducer } from "./position";
 
 interface StoreEnhancerState {}
 
@@ -18,6 +19,7 @@ export interface RootState extends StoreEnhancerState {
   enthusiasm: EnthusiasmState
   employee: EmployeeState
   employeeStatus: EmployeeStatusState
+  position: PositionState
 }
 
 import { RootAction } from "./root-action"
@@ -30,4 +32,5 @@ export const rootReducer = combineReducers<RootState, RootAction>({
   enthusiasm: enthusiasmReducer,
   employee: employeeReducer,
   employeeStatus: employeeStatusReducer,
+  position: positionReducer,
 })

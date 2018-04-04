@@ -8,18 +8,18 @@ import {
   PrimaryButton,
   Checkbox,
 } from "office-ui-fabric-react"
-import { IEmployeeStatus } from "../../../../../models"
+import { IPosition } from "../../../../../models"
 import { autobind } from "@uifabric/utilities"
 import _ from "lodash"
 import { DialogBox } from '../../../../DialogBox'
 
 interface IProps {
-  onSave: (newEmployeeStatus: IEmployeeStatus) => void
+  onSave: (newPosition: IPosition) => void
 }
 
 interface IState {
   showPanel: boolean
-  employeeStatus: IEmployeeStatus
+  position: IPosition
 }
 
 interface InputEvent {
@@ -29,7 +29,7 @@ interface InputEvent {
   }
 }
 
-export class NewEmployeeStatus extends React.Component<
+export class NewPosition extends React.Component<
     IProps,
     IState
 > {
@@ -39,7 +39,7 @@ export class NewEmployeeStatus extends React.Component<
 
     this.state = {
       showPanel: false,
-      employeeStatus: {
+      position: {
         code: "",
         name: "",
         active: true
@@ -55,7 +55,7 @@ export class NewEmployeeStatus extends React.Component<
         type={PanelType.largeFixed}
       >
         <span>
-          <h1>New Employee Status</h1>
+          <h1>New Position</h1>
 
           <TextField
             label="Code"
@@ -69,36 +69,34 @@ export class NewEmployeeStatus extends React.Component<
           <Checkbox
             label='Active'
             onChange={this.onCheckboxChange}
-            checked={this.state.employeeStatus.active}
+            checked={this.state.position.active}
           />
           
           <DefaultButton onClick={this.openDialogBox}>Save</DefaultButton>
         </span>
         <DialogBox 
-          onContinue={this.continueSave}
-          ref={(thisElement) => this._DialogBox = thisElement}
-          title={'Save Record'}
-          subText={'Are you sure you want to save this record?'}
-          primaryButton={'Yes'}
-          secondaryButton={'No'}
+            onContinue={this.continueSave}
+            ref={(thisElement) => this._DialogBox = thisElement}
+            title={'Save Record'}
+            subText={'Are you sure you want to save this record?'}
+            primaryButton={'Yes'}
+            secondaryButton={'No'}
         />
       </Panel>
     )
   }
-
   @autobind
   setValueToState(propertyName: string, value: string) {
-    const employeeStatus: IEmployeeStatus = _.assign({}, this.state.employeeStatus, {
+    const position: IPosition = _.assign({}, this.state.position, {
       [propertyName]: value,
     })
-    this.setState({ employeeStatus })
+    this.setState({ position })
   }
 
   // @autobind
-  // saveNewEmployeeStatus() {
-  //   this.props.onSave(this.state.employeeStatus)
+  // saveNewPosition() {
+  //   this.props.onSave(this.state.position)
   // }
-  
   @autobind
   private _closePanel() {
     this.setState({ showPanel: false })
@@ -106,13 +104,13 @@ export class NewEmployeeStatus extends React.Component<
 
   @autobind
   onCheckboxChange(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
-    const employeeStatus: IEmployeeStatus = _.assign({}, this.state.employeeStatus, {
+    const position: IPosition = _.assign({}, this.state.position, {
       active: isChecked,
     })
-    this.setState({ employeeStatus })
+    this.setState({ position })
   }
 
-  public show(employeeStatus?: IEmployeeStatus) {
+  public show(position?: IPosition) {
     this.setState({ showPanel: true })
   }
 
@@ -123,7 +121,7 @@ export class NewEmployeeStatus extends React.Component<
 
   @autobind
   continueSave() {
-    this.props.onSave(this.state.employeeStatus)
+    this.props.onSave(this.state.position)
     this._closePanel()
   }
 }

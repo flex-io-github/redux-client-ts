@@ -1,6 +1,7 @@
-import { EmployeeMapper, EmployeeStatusMapper } from '../../mappers';
+import { EmployeeMapper, EmployeeStatusMapper, PositionMapper } from '../../mappers';
 import { EmployeeDataSource } from './dsEntities/EmployeeDataSource';
 import { EmployeeStatusDataSource } from './dsEntities/EmployeeStatusDataSource';
+import { PositionDataSource } from './dsEntities/PositionDataSource';
 
 const endPointUrl = 'http://localhost:5000/api';
 // const studentsCollection = '/employees';
@@ -17,4 +18,11 @@ export class EmployeeStatusDS {
         endPointUrl,
         collectionName: 'EmployeeStatus'
     }, new EmployeeStatusMapper());
+}
+
+export class PositionDS {
+    static positions: PositionDataSource = new PositionDataSource({
+        endPointUrl,
+        collectionName: 'Position'
+    }, new PositionMapper());
 }

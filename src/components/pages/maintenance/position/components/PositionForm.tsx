@@ -1,32 +1,32 @@
 import * as React from "react"
 import { Panel, PanelType, TextField, Checkbox, DefaultButton } from "office-ui-fabric-react"
 import { autobind } from "@uifabric/utilities"
-import { IEmployeeStatus } from "../../../../../models"
+import { IPosition } from "../../../../../models"
 import _ from 'lodash';
 import { DialogBox } from '../../../../DialogBox'
 
-interface IEmployeeStatusFormProps {
-  employeeStatusProps: IEmployeeStatus
-  updateEmployeeStatus: (employeeStatus: IEmployeeStatus) => void
+interface IPositionFormProps {
+  positionProps: IPosition
+  updatePosition: (position: IPosition) => void
 }
 
-interface IEmployeeStatusFormState {
+interface IPositionFormState {
   showPanel: boolean
-  employeeStatusState: IEmployeeStatus
+  positionState: IPosition
 }
 
-type State = IEmployeeStatusFormState
+type State = IPositionFormState
 
-type Props = IEmployeeStatusFormProps
+type Props = IPositionFormProps
 
-export class EmployeeStatusForm extends React.Component<Props, State> {
+export class PositionForm extends React.Component<Props, State> {
   private _DialogBox: DialogBox | any
   constructor(props: Props) {
     super(props)
     // console.log('Component has been created')
     this.state = {
       showPanel: false,
-      employeeStatusState:
+      positionState:
       {
         name: "",
         code: "",
@@ -37,12 +37,12 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: any){
-      this.setState({ employeeStatusState:nextProps.employeeStatusProps })
+      this.setState({ positionState:nextProps.positionProps })
   }
 
     render() {
-        const { employeeStatusState } = this.state;
-        const { employeeStatusProps } = this.props
+        const { positionState } = this.state;
+        const { positionProps } = this.props
         return (
 
         <Panel
@@ -51,22 +51,22 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
             type={PanelType.largeFixed}
         >
             <span>
-            <h1>Employee Status</h1>
+            <h1>Position</h1>
 
             <TextField
                 label="Code"
-                value={employeeStatusState.code}
+                value={positionState.code}
                 onChanged={e => this.setValueToState("code", e)}
             />
             <TextField
                 label="Given Name"
-                value={employeeStatusState.name}
+                value={positionState.name}
                 onChanged={e => this.setValueToState("name", e)}
             />
             <Checkbox
                 label='Active'
                 onChange={this.onCheckboxChange}
-                checked={employeeStatusState.active}
+                checked={positionState.active}
             />
             <DefaultButton onClick={this.openDialogBox}>Save</DefaultButton>
             </span>
@@ -74,7 +74,7 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
               onContinue={this.continueSave}
               ref={(thisElement) => this._DialogBox = thisElement}
               title={'Save Record'}
-              subText={'Are you sure you want to save this record?'}
+              subText={'Are you sure you want to update this record?'}
               primaryButton={'Yes'}
               secondaryButton={'No'}
             />
@@ -84,15 +84,16 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
 
   // @autobind
   // saveToDatabase(){
-  //   this.props.updateEmployeeStatus(this.state.employeeStatusState);
+  //   this.props.updatePosition(this.state.positionState);
+    
   // }
 
   @autobind
   setValueToState(propertyName: string, value: any) {
-    const employeeStatusState: IEmployeeStatus = _.assign({}, this.state.employeeStatusState, {
+    const positionState: IPosition = _.assign({}, this.state.positionState, {
       [propertyName]: value,
     })
-    this.setState({ employeeStatusState })
+    this.setState({ positionState })
   }
 
   @autobind
@@ -107,10 +108,10 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
 
   @autobind
   onCheckboxChange(ev: React.FormEvent<HTMLElement>, isChecked: boolean) {
-    const employeeStatusState: IEmployeeStatus = _.assign({}, this.state.employeeStatusState, {
+    const positionState: IPosition = _.assign({}, this.state.positionState, {
       active: isChecked,
     })
-    this.setState({ employeeStatusState })
+    this.setState({ positionState })
   }
 
   @autobind
@@ -120,7 +121,7 @@ export class EmployeeStatusForm extends React.Component<Props, State> {
 
   @autobind
   continueSave() {
-    this.props.updateEmployeeStatus(this.state.employeeStatusState);
+    this.props.updatePosition(this.state.positionState);
     this._closePanel()
   }
 }
